@@ -1,0 +1,18 @@
+# File: config/nodes.yaml
+
+# List of Redis nodes in your distributed environment
+# You can specify role as 'master' or 'replica'
+
+nodes:
+  - name: redis-master
+    host: 127.0.0.1
+    port: 6379
+    role: master
+  - name: redis-replica-1
+    host: 127.0.0.1
+    port: 6380
+    role: replica
+  - name: redis-replica-2
+    host: 127.0.0.1
+    port: 6381
+    role: replica
