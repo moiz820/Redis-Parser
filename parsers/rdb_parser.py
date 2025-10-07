@@ -202,6 +202,25 @@ def parse_rdb(path):
 
         else:
             i += 1
+def parse_rdb_logs():
+    rdb_path = input("Enter RDB file path (leave empty to auto-load from nodes.yaml): ").strip()
+    if rdb_path:
+        # Parse single file
+        if os.path.exists(rdb_path):
+            parse_rdb(rdb_path)
+        else:
+            print(f"[!] File not found: {rdb_path}")
+    else:
+        # Auto-load from nodes.yaml
+        nodes = load_nodes()
+        for node in nodes:
+            rdb_path = f"logs/{node['name']}/dump.rdb"
+            print(f"\n[+] Parsing RDB for node: {node['name']} ({rdb_path})")
+            try:
+                parse_rdb(rdb_path)
+            except FileNotFoundError:
+                print(f"⚠️  RDB file not found for {node['name']} at {rdb_path}")
+
 
 # ---- Run ----
 
